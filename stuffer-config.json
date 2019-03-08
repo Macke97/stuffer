@@ -4,9 +4,34 @@
     ],
     "modifiers": {
         "resize": {
-            "small": [ 256, "auto", 80 ],
-            "thumb": [ 150, 150, 80 ],
-            "square": [ 256, 256, 80, "contain" ]
+            "small": [
+                256,
+                "auto",
+                80
+            ],
+            "thumb": [
+                150,
+                150,
+                80
+            ],
+            "square": [
+                256,
+                256,
+                80,
+                "contain"
+            ]
+        }
+    },
+    "postprocess": {
+        "gzip": {
+            "match": "(.*)",
+            "apply": "gzip",
+            "options": {}
+        },
+        "mercedes": {
+            "match": "(.*).xlsx",
+            "apply": "mercedes",
+            "options": {}
         }
     }
 }

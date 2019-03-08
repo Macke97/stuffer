@@ -4,29 +4,52 @@
         "mod-jimp",
         "#cache"
     ],
-
     "postprocess": {
         "gzip": {
             "match": "(.*)",
-            "apply":"gzip",
+            "apply": "gzip",
+            "options": {}
+        },
+        "mercedes": {
+            "match": "(.*).xlsx",
+            "apply": "mercedes",
             "options": {}
         }
     },
-
     "modifiers": {
         "resize": {
-            "small": [256, "auto", 80],
-            "medium": [512, "auto", 80],
-            "big": [1024, "auto", 80],
-            "thumb": [150, 150, 80, "cover"]
+            "small": [
+                256,
+                "auto",
+                80
+            ],
+            "medium": [
+                512,
+                "auto",
+                80
+            ],
+            "big": [
+                1024,
+                "auto",
+                80
+            ],
+            "thumb": [
+                150,
+                150,
+                80,
+                "cover"
+            ]
         }
     },
-
     "spaces": {
         "__public": {
             "modifiers": {
                 "resize": {
-                    "medium": [ 250, "auto", 10 ]
+                    "medium": [
+                        250,
+                        "auto",
+                        10
+                    ]
                 }
             },
             "postprocess": {
