@@ -91,7 +91,7 @@ export default class Excel2JSON {
             // Loop through each model's rows
             // On every iteration loop thorugh the columns
             if (!sheet[`A${i}`]) {
-                throw new Error('Could not find', `A${i}`)
+                throw new Error(`Could not find A${i}. Please make sure that all blank cells are actually empty.`)
             }
             const title = sheet[`A${i}`].w.trim()
             columnsToGet.forEach(item => {

@@ -16,7 +16,7 @@ const exec = (origin, target, task) => new Promise(async (resolve, reject) => {
         data = await excel2JSON.start()
     } catch (error) {
         console.error("\x1b[31m", error.message)
-        return
+        reject()
     }
     await fs.writeJSON(target, data)
 
