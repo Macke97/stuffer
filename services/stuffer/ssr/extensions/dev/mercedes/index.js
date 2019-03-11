@@ -14,6 +14,7 @@ const exec = (origin, target, task) => new Promise(async (resolve) => {
     let data;
     try {
         data = await excel2JSON.start()
+
     } catch (error) {
         console.log(error)
         resolve()
