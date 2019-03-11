@@ -3,27 +3,28 @@
  */
 import fs from 'fs-extra'
 import archiver from 'archiver'
+import xlsx from 'xlsx'
+import Excel2JSON from './Excel2JSON.class'
+import { twentyFour, thirtySix, fourtyEight, sixty } from './worksheets'
 import { REGISTER_PROCESSORS } from 'features/postprocess/hooks'
 const fileName = file => `${file.fileName}.json`
-const exec = (origin, target, task) => new Promise(async (resolve, reject) => {
-    console.log(origin)
-    console.log(target)
-    console.log(task)
-    await fs.writeJSON(target, { "hoho": 123 })
+const exec = (origin, target, task) => new Promise(async (resolve) => {
+    const workbook = xlsx.readFile(origin, { sheetStubs: true });
+    const excel2JSON = new Excel2JSON(workbook, [twentyFour, thirtySix, fourtyEight, sixty])
+    let data;
+    try {
+        data = await excel2JSON.start()
+
+    } catch (error) {
+        console.log(error)
+        resolve()
+        return
+    }
+    await fs.writeJSON(target, data)
+
     resolve()
-    // const output = fs.createWriteStream(target)
-    // const archive = archiver('zip', {
-    //     zlib: {
-    //         level: task.options.level || 9,
-    //     },
-    // })
-    // output.on('close', () => resolve())
-    // output.on('error', (err) => reject(err))
-    // archive.pipe(output)
-    // archive.append(fs.createReadStream(origin), {
-    //     name: task.fileName,
-    // })
-    // archive.finalize()
+    console.log('Excel conversion done!')
+
 })
 export default ({ registerAction }) =>
     registerAction({
